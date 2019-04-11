@@ -7,25 +7,58 @@ package us.floydasaur.javaintro;
  * Which is a port of code originally written at repl.it
  * original code can be found here: https://repl.it/student/submissions/6349576
  * @author Floyd Zamarripa
- * @version 0.1 4-10-19
+ * @version 1.0 4-11-19
  */
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     TextView textView;
+    EditText inputIntA;
+    EditText inputIntB;
+    Button buttonStart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // TODO: Set this to accept input from the text boxes.
-        int x = 5;
-        int y = 6;
+
+        buttonStart = findViewById(R.id.button_start);
+        buttonStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Ensure text is cleared on each click.
+                textView = findViewById(R.id.textview_results);
+                textView.setText("");
+
+                // Find inputs, get text as string, convert to int.
+                inputIntA = findViewById(R.id.input_int_a);
+                inputIntB = findViewById(R.id.input_int_b);
+
+
+                // Run the exercise functions, but only if input boxes aren't empty.
+                if (!inputIntA.getText().toString().isEmpty() && !inputIntB.getText().toString().isEmpty()){
+                    int x = Integer.parseInt(inputIntA.getText().toString());
+                    int y = Integer.parseInt(inputIntB.getText().toString());
+                    startAppend(x,y);
+                } else {
+                    textView.setText("Integers required to start.");
+                }
+            }
+        });
+        
+    }
+
+    // Swapped the voids for the appropriate data types
+    // and swapped the prints for returns.
+    public void startAppend(int x, int y) {
         textView = findViewById(R.id.textview_results);
         textView.append(E1(x) + "\n");
         textView.append(E2A() + "\n");
@@ -39,12 +72,8 @@ public class MainActivity extends AppCompatActivity {
         textView.append(E4C(x, y) + "\n");
         textView.append(E4D(x, y) + "\n");
     }
-
-    // Swapped the voids for the appropriate data types
-    // and swapped the prints for returns.
-
     public static int E1(int z) {
-        // Exercise 1: declare a data member, assign it the value of z and print it to the screen
+        // Exercise 1: declare a data member, assign it the value of z and print it to the screen.
         int numUno = z;
         return numUno;
     }
@@ -95,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         // print result of every calculation
         // (can assign a value when the variable is declared)
         byte x = 126;
-        String result = "";
+        String result = "";   //  Result:
         result += x++ + "\n"; //  126 to  127
         result += x++ + "\n"; //  127 to -128
         result += ++x + "\n"; // -128 to -127
