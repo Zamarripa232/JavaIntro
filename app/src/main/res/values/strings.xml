@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">JavaIntro</string>
+    <string name="app_name">Java_Intro: The Android Port</string>
+    <string name="any_int">Any Integer</string>
+    <string name="button_start">Start</string>
 </resources>
